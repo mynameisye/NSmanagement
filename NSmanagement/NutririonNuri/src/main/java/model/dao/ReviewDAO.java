@@ -14,13 +14,13 @@ public class ReviewDAO {
 	}
 	
 	
-	private static String query = "SELECT BOARD.MEM_ID, " +
-									"BOARD.TITLE, " +
-									"BOARD.DATE";
+	private static String query = "SELECT BOARD.MEMID, " +
+									"REVIEW.TITLE, " +
+									"REVIEW.POSTED";
 	
 	public List<Review> findBoardList(){
-		String allQuery = query + "," + "BOARD.REVIEW_ID, " +
-				"BOARD.SUP_ID " + "FROM BOARD ORDER BY BOARD.REVIEW_ID";
+		String allQuery = query + "," + "REVIEW.REVIEWID, " +
+				"REVIEW.SUPID " + "FROM REVIEW ORDER BY REVIEW.REVIEWID";
 
 		
 		jdbcUtil.setSqlAndParameters(allQuery, null);
@@ -30,11 +30,11 @@ public class ReviewDAO {
 			List<Review> list = new ArrayList<Review>();
 			while(rs.next()) {
 				Review dto = new Review();
-				dto.setMemId(rs.getInt("MEM_ID"));
+				dto.setMemId(rs.getInt("MEMID"));
 				dto.setTitle(rs.getString("TITLE"));
-				dto.setDate(rs.getString("DATE"));
-				dto.setReviewId(rs.getInt("REVIEW_ID"));
-				dto.setSupId(rs.getInt("SUP_ID"));
+				dto.setDate(rs.getString("POSTED"));
+				dto.setReviewId(rs.getInt("REVIEWID"));
+				dto.setSupId(rs.getInt("SUPID"));
 				
 				list.add(dto);
 			}
@@ -49,9 +49,9 @@ public class ReviewDAO {
 	}
 	
 	public List<Review> findMemberBoard(int memID) {
-		String memQuery = query + "," + "BOARD.REVIEW_ID, " +
-				"BOARD.SUP_ID " + "FROM BOARD ORDER BY BOARD.REVIEW_ID" +
-				"WHERE BOARD.MEM_ID = ?";
+		String memQuery = query + "," + "REVIEW.REVIEWID, " +
+				"REVIEW.SUPID " + "FROM REVIEW ORDER BY REVIEW.REVIEWID" +
+				"WHERE REVIEW.MEMID = ?";
 		
 		Object[] param = new Object[] { memID };
 		jdbcUtil.setSqlAndParameters(memQuery, param);
@@ -62,11 +62,11 @@ public class ReviewDAO {
 			
 			while(rs.next()) {
 				Review dto = new Review();
-				dto.setMemId(rs.getInt("MEM_ID"));
+				dto.setMemId(rs.getInt("MEMID"));
 				dto.setTitle(rs.getString("TITLE"));
-				dto.setDate(rs.getString("DATE"));
-				dto.setReviewId(rs.getInt("REVIEW_ID"));
-				dto.setSupId(rs.getInt("SUP_ID"));
+				dto.setDate(rs.getString("POSTED"));
+				dto.setReviewId(rs.getInt("REVIEWID"));
+				dto.setSupId(rs.getInt("SUPID"));
 				
 				list.add(dto);
 			}
@@ -84,9 +84,9 @@ public class ReviewDAO {
 	public int addBoardList(Review brd) {
 		int result = 0;
 		
-		String insert = "INSERT INTO BOARD (MEM_ID, TITLE, DATE, " +
-							"REVIEW_ID, SUP_ID) " +
-							"VALUES (?, ?, ?, review_seq.nextval, ?)";
+		String insert = "INSERT INTO REVIEW (MEMID, TITLE, POSTED, " +
+							"REVIEWID, SUPID) " +
+							"VALUES (?, ?, ?, reviewseq.nextval, ?)";
 		
 		Object[] param = new Object[] {brd.getMemId(), brd.getTitle(), brd.getDate(), brd.getSupId()};
 		
@@ -108,8 +108,8 @@ public class ReviewDAO {
 	public int updateBoardList(Review brd) {
 		int result = 0;
 		
-		String update = "UPDATE BOARD  " + 
-						"SET TITLE=? " + "WHERE REVIEW_ID=?";
+		String update = "UPDATE REVIEW  " + 
+						"SET TITLE=? " + "WHERE REVIEWID=?";
 		
 		Object[] param = new Object[] {brd.getTitle(), brd.getReviewId()};
 		

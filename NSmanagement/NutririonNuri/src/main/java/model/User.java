@@ -26,8 +26,9 @@ public class User { //User
         this.email = email;
     };
     
-    public User(String userId, String password, String name, String email, String phone) {
-        this.id = userId;
+    public User(int memId, String id, String password, String name, String email, String phone) {
+        this.id = id;
+        this.memid = memId;
         this.pw = password;
         this.name = name;
         this.email = email;

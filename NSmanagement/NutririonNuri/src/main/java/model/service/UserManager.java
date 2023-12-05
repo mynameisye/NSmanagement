@@ -27,7 +27,7 @@ public class UserManager {
 	}
 	
 	//add
-	public int add(User user) throws SQLException, ExistingUserException{
+	public int create(User user) throws SQLException, ExistingUserException{
 	    if(userDAO.existingUser(user.getId())==true) {
 	        throw new ExistingUserException(user.getId()+"는 이미 존재하는 아이디입니다.");
 	    }
@@ -53,6 +53,11 @@ public class UserManager {
 	    }
 	    
 	    return user;
+	}
+	
+	//findUserList
+	public List<User> findUserList() throws SQLException{
+	    return userDAO.findUserList();
 	}
 
     public void login(String userId, String password) {
