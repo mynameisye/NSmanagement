@@ -3,6 +3,8 @@ package model.dao;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.User;
 
@@ -144,5 +146,38 @@ public class UserDAO {
         }
         
         return false;
+    }
+    
+    //모든 유저 list 반환
+    public List<User> findUserList() throws SQLException {
+        StringBuilder query = new StringBuilder();
+        List<User> list = new ArrayList<>();
+        
+        query.append("SELECT memid, pwd, name, gender, phone, birthday, email ");
+        query.append("FROM Member ");
+        jdbcUtil.setSqlAndParameters(query.toString(), null);
+        
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            while(rs.next()) {
+                int memid = rs.getInt("memid");
+                String id = rs.getString("id");
+                String pwd = rs.getString("pwd");
+                String name = rs.getString("name");
+                char gender = rs.getString("gender").charAt(0);
+                String phone = rs.getString("phone");
+                LocalDate birthday = rs.getDate("birthday").toLocalDate();
+                String email = rs.getString("email");
+                
+                User user = new User(memid, id, pwd, name, gender, phone, birthday, email);
+                list.add(user);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.close();
+        }
+        
+        return list;
     }
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 import model.NS;
+import model.service.NSManager;
 import model.service.UserManager;
 
 public class SearchNSController implements Controller {
@@ -14,7 +15,7 @@ public class SearchNSController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {          
         
-        UserManager manager = UserManager.getInstance();
+        NSManager manager = NSManager.getInstance();
         String keyword = request.getParameter("keyword");
         String option = request.getParameter("searchOption");
         

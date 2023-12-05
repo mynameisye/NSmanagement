@@ -12,6 +12,7 @@ import controller.Controller;
 public class RegisterUserController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		User user = new User(
+		        -1,
 				request.getParameter("userId"), request.getParameter("password"),
 				request.getParameter("name"), request.getParameter("email"),
 				request.getParameter("phone"));
