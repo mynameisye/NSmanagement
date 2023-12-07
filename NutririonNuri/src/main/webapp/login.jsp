@@ -7,7 +7,7 @@
 </head>
 
 <body>       
-    <form name="loginForm" method="get" action="login.jsp" target="login">
+    <form name="loginForm" method="get" action="index.jsp" target="login">
         <br>
         <fieldset>
             <font size="3">
