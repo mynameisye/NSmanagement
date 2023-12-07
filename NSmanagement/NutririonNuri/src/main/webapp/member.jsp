@@ -18,7 +18,7 @@
     <center>
         <div>
             <table border="0" cellspacing="10" cellpadding="10" width="800" height="600" align="center">
-                <form method="post" action="member.jsp" target="_self" name="joinForm">
+                <form method="post" action="index.jsp" target="_self" name="joinForm">
                     <tr>
                         <td align="center"><h3>회원가입</h3></td>
                         <td></td>
