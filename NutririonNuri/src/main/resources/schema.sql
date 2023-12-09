@@ -1,34 +1,43 @@
+
 DROP SEQUENCE DiseaseId;
-DROP SEQUENCE MemId;
-DROP SEQUENCE ReviewId;
-DROP SEQUENCE SupId;
 
 CREATE SEQUENCE DiseaseId
 	INCREMENT BY 1
 	START WITH 1;
 
+DROP SEQUENCE MemId;
+
 CREATE SEQUENCE MemId
 	INCREMENT BY 1
 	START WITH 1;
 
+DROP SEQUENCE ReviewId;
+
 CREATE SEQUENCE ReviewId
 	INCREMENT BY 1
 	START WITH 1;
+
+DROP SEQUENCE SupId;
 
 CREATE SEQUENCE SupId
 	INCREMENT BY 1
 	START WITH 1;
 
 DROP TABLE Disease CASCADE CONSTRAINTS PURGE;
-DROP TABLE TakingSupplement CASCADE CONSTRAINTS PURGE;
-DROP TABLE MemberInfo CASCADE CONSTRAINTS PURGE;
-DROP TABLE Review CASCADE CONSTRAINTS PURGE;
-DROP TABLE Supplement CASCADE CONSTRAINTS PURGE;
-DROP TABLE Memeber CASCADE CONSTRAINTS PURGE;
 
-CREATE TABLE Memeber
+DROP TABLE TakingSupplement CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE MemberInfo CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Review CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Supplement CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Member CASCADE CONSTRAINTS PURGE;
+
+CREATE TABLE Member
 (
-	MemId                CHAR(18)  NOT NULL ,
+	MemId                integer  NOT NULL ,
 	Name                 VARCHAR2(15)  NOT NULL ,
 	Gender               char(1)  NULL ,
 	Phone                CHAR(18)  NULL ,
@@ -39,10 +48,10 @@ CREATE TABLE Memeber
 	Pwd                  VARCHAR2(15)  NOT NULL  CONSTRAINT  Validation_Rule_Pwd CHECK (Pwd >= 8)
 );
 
-CREATE UNIQUE INDEX XPKMemeber ON Memeber
+CREATE UNIQUE INDEX XPKMemeber ON Member
 (MemId   ASC);
 
-ALTER TABLE Memeber
+ALTER TABLE Member
 	ADD CONSTRAINT  XPKMemeber PRIMARY KEY (MemId);
 
 CREATE TABLE MemberInfo
@@ -55,7 +64,7 @@ CREATE TABLE MemberInfo
 	Medicine             VARCHAR2(15)  NULL ,
 	Supplement           VARCHAR2(15)  NULL ,
 	PrefIngredient       VARCHAR2(15)  NULL ,
-	MemId                char(18)  NOT NULL 
+	MemId                integer  NOT NULL 
 );
 
 CREATE UNIQUE INDEX XPKMemberInfo ON MemberInfo
@@ -83,13 +92,13 @@ ALTER TABLE Supplement
 
 CREATE TABLE TakingSupplement
 (
-	MemId                CHAR(18)  NOT NULL ,
 	SupId                integer  NOT NULL ,
 	PreCaution           VARCHAR2(30)  NULL ,
 	IntakeTime           TIMESTAMP  NULL ,
 	IntakeAmount         integer  NULL ,
 	IntakeInform         integer  NOT NULL ,
-	Rate                 float  NULL 
+	Rate                 float  NULL ,
+	MemId                integer  NOT NULL 
 );
 
 CREATE UNIQUE INDEX XPKMemberInfo_Supplement ON TakingSupplement
@@ -101,10 +110,10 @@ ALTER TABLE TakingSupplement
 CREATE TABLE Review
 (
 	Title                VARCHAR2(15)  NOT NULL ,
-	MemId                CHAR(18)  NOT NULL ,
 	Posted               date  NULL ,
-	ReviewId             CHAR(18)  NOT NULL ,
-	SupId                integer  NOT NULL 
+	ReviewId             integer  NOT NULL ,
+	SupId                integer  NOT NULL ,
+	MemId                integer  NOT NULL 
 );
 
 CREATE UNIQUE INDEX XPKReview ON Review
@@ -115,9 +124,9 @@ ALTER TABLE Review
 
 CREATE TABLE Disease
 (
-	DiseaseId            CHAR(18)  NOT NULL ,
+	DiseaseId            integer  NOT NULL ,
 	DiseaseName          CHAR(18)  NULL ,
-	MemId                char(18)  NOT NULL 
+	MemId                integer  NOT NULL 
 );
 
 CREATE UNIQUE INDEX XPKDisease ON Disease
@@ -128,11 +137,7 @@ ALTER TABLE Disease
 
 ALTER TABLE MemberInfo
 	ADD (
-CONSTRAINT R_1 FOREIGN KEY (MemId) REFERENCES Memeber (MemId));
-
-ALTER TABLE TakingSupplement
-	ADD (
-CONSTRAINT R_7 FOREIGN KEY (MemId) REFERENCES MemberInfo (MemId));
+CONSTRAINT R_1 FOREIGN KEY (MemId) REFERENCES Member (MemId));
 
 ALTER TABLE TakingSupplement
 	ADD (
@@ -140,11 +145,15 @@ CONSTRAINT R_8 FOREIGN KEY (SupId) REFERENCES Supplement (SupId));
 
 ALTER TABLE TakingSupplement
 	ADD (
-CONSTRAINT R_10 FOREIGN KEY (MemId) REFERENCES Memeber (MemId));
+CONSTRAINT R_10 FOREIGN KEY (MemId) REFERENCES Member (MemId));
+
+ALTER TABLE TakingSupplement
+	ADD (
+CONSTRAINT R_7 FOREIGN KEY (MemId) REFERENCES MemberInfo (MemId));
 
 ALTER TABLE Review
 	ADD (
-CONSTRAINT R_3 FOREIGN KEY (MemId) REFERENCES Memeber (MemId));
+CONSTRAINT R_3 FOREIGN KEY (MemId) REFERENCES Member (MemId));
 
 ALTER TABLE Review
 	ADD (

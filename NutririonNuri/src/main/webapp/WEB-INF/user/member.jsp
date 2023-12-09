@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +20,7 @@
     <center>
         <div>
             <table border="0" cellspacing="10" cellpadding="10" width="800" height="600" align="center">
-                <form method="post" action="index.jsp" target="_self" name="joinForm">
+                <form method="post" action="<c:url value='/user/register' />" target="_self" name="joinForm">
                     <tr>
                         <td align="center"><h3>회원가입</h3></td>
                         <td></td>
@@ -42,11 +44,6 @@
                     <tr>
                         <td align="center">성별</td>
                         <td><input type="radio" name="gender" value="남자">남자<input type="radio" name="gender" value="여자">여자</td>
-                    </tr>
-                    <tr>
-                        <td align="center">주민등록번호</td>
-                        <td><input type="text" name="idLeft" maxlength="6" size="6"> - <input type="password" name="idRight" maxlength="7" size="7">&nbsp;&nbsp;
-                        </td>
                     </tr>
                     <tr>
                         <td align="center">생년월일</td>

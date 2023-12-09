@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,7 +14,7 @@
         <div class="board_title">
             <strong>리뷰</strong>
         </div>
-        <form>
+        <form action="<c:url value='/review/write' />">
             <div class="board_write_wrap">
                 <div class="board_write">
                     <div class="title">
@@ -29,7 +30,9 @@
                 </div>
                 <div class="bt_wrap">
                     <a href="./review_view.jsp" class="on">등록</a>
+                    <input type="submit" value="등록">
                     <a href="./review_list.jsp">취소</a>
+                    <input type="reset" value="취소">
                 </div>
             </div>
         </form>

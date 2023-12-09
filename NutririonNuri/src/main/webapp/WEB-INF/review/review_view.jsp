@@ -44,8 +44,8 @@
                 </div>
             </div>
             <div class="bt_wrap">
-                <a href="./review_list.jsp" class="on">목록</a>
-                <a href="./review_edit.jsp">수정</a>
+                <a href="../review/review_list.jsp" class="on">목록</a>
+                <a href="../review/review_write.jsp">수정</a>
             </div>
         </div>
     </div>

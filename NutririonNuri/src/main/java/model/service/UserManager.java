@@ -64,4 +64,8 @@ public class UserManager {
         // TODO Auto-generated method stub
         
     }
+    
+    public int remove(String userId) throws SQLException, UserNotFoundException {
+        return userDAO.deleteUser(userId);
+    }
 }

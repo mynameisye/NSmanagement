@@ -20,8 +20,8 @@
     <div align="left">
         <br/><br/><br/>
         <font size="5">
-            <a href="./personal_management.jsp" target="_top">• 회원정보 관리</a><br><br>
-            <a href="./review_list.jsp" target="_top">• 게시판</a> <br><br> 
+            <a href="./WEB-INF/user/personal_management.jsp" target="_top">• 회원정보 관리</a><br><br>
+            <a href="./WEB-INF/review/review_list.jsp" target="_top">• 게시판</a> <br><br> 
         </font>
     </div>
 </body>

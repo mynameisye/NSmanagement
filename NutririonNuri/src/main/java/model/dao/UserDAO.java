@@ -18,17 +18,19 @@ public class UserDAO {
     //유저 가입(생성)
     public int addUser(User user) {
         StringBuilder query = new StringBuilder();
-        query.append("INSERT INTO Member ");
+        query.append("INSERT INTO Member (memid, name, id, pwd, gender, phone, email, birthday) ");
         query.append("VALUES (?, ?, ?, ?, ?, ?, ?) ");
         
         jdbcUtil.setSqlAndParameters(query.toString(), 
-                new Object[] {"mem_seq.nextval",
+                new Object[] {
+                        "memid.nextval",
+                        user.getName(),
                         user.getId(),
                         user.getPw(),
-                        user.getName(),
+                        user.getGender(),
                         user.getPhone(),
+                        user.getEmail(),
                         user.getBirthDay().toString(),
-                        user.getEmail()
                         });
         try {
             int result = jdbcUtil.executeUpdate();

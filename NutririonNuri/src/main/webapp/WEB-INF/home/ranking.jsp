@@ -50,7 +50,7 @@ img {
 						<td><img src="./images/4.PNG"></img></td>
 						<td>5위 - 트리플 스트렝스 오메가3 피쉬오일(오메가3 1055mg)</td>
 						<td><img src="./images/5.PNG"></img></td>
-						<td>6위 - 비타만C 1000</td>
+						<td>6위 - 비타민C 1000</td>
 						<td><img src="./images/6.PNG"></img></td>
 					</tr>
 				</table>

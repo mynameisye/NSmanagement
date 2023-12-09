@@ -32,7 +32,7 @@
         <!--필라이즈 사이트처럼 header 부분에 고정하는게 좋을지도-->
         <header>
             <div class="search_wrap">
-                <form name="search">
+                <form name="search" action="./ns/search_list.jsp">
                     <select name="searchOption">
                         <option value="total">통합검색</option>
                         <option value="name">이름</option>
