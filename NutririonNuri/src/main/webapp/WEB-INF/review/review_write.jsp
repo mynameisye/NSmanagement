@@ -25,7 +25,7 @@
                     </div>
                     <hr>
                     <div class="cont">
-                        <textarea id="article" placeholder="내용 입력"></textarea>
+                        <textarea id="contents" placeholder="내용 입력"></textarea>
                     </div>
                 </div>
                 <div class="bt_wrap">

@@ -4,9 +4,21 @@ package model;
 public class Review { //BoardDTO -> Review
 	private String title = null;
 	private int MemId = 0;
-	private String date = null;
+	private String posted = null;
 	private int ReviewId = 0;
 	private int SupId = 0;
+	private String content = "";
+	
+	
+	public Review() {};
+	public Review(int reviewid, int memid, int supid, String title, String posted, String content) {
+	    this.ReviewId = reviewid;
+	    this.MemId = memid;
+	    this.SupId = supid;
+	    this.title = title;
+	    this.posted = posted;
+	    this.content = content;
+	};
 	
 	
 	public String getTitle() {
@@ -21,11 +33,11 @@ public class Review { //BoardDTO -> Review
 	public void setMemId(int memId) {
 		MemId = memId;
 	}
-	public String getDate() {
-		return date;
+	public String getPosted() {
+		return posted;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setPosted(String posted) {
+		this.posted = posted;
 	}
 	public int getReviewId() {
 		return ReviewId;
@@ -39,6 +51,12 @@ public class Review { //BoardDTO -> Review
 	public void setSupId(int supId) {
 		SupId = supId;
 	}
+    public String getContent() {
+        return content;
+    }
+    public void setContent(String content) {
+        this.content = content;
+    }
 	
 	
 	

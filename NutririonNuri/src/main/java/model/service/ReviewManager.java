@@ -29,8 +29,10 @@ public class ReviewManager {
         return reviewDAO.findBoardList();
     }
     
-    //리뷰 검색(미구현)
-    //
+    //리뷰 검색
+    public Review findReview(int reviewId) throws SQLException{
+        return reviewDAO.findReview(reviewId);
+    }
     
     //findMemberReviewList(userId)
     //내 리뷰 조회 기능

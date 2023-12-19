@@ -53,6 +53,6 @@ public class UpdateUserController implements Controller {
 
 		UserManager manager = UserManager.getInstance();
 		manager.update(updateUser);			
-        return "redirect:/user/index";			
+        return "redirect:/home";			
     }
 }

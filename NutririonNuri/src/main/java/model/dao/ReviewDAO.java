@@ -14,7 +14,7 @@ public class ReviewDAO {
 	}
 	
 	
-	private static String query = "SELECT BOARD.MEMID, " +
+	private static String query = "SELECT REVIEW.MEMID, " +
 									"REVIEW.TITLE, " +
 									"REVIEW.POSTED";
 	
@@ -32,7 +32,7 @@ public class ReviewDAO {
 				Review dto = new Review();
 				dto.setMemId(rs.getInt("MEMID"));
 				dto.setTitle(rs.getString("TITLE"));
-				dto.setDate(rs.getString("POSTED"));
+				dto.setPosted(rs.getString("POSTED"));
 				dto.setReviewId(rs.getInt("REVIEWID"));
 				dto.setSupId(rs.getInt("SUPID"));
 				
@@ -44,9 +44,38 @@ public class ReviewDAO {
 		}finally {
 			jdbcUtil.close();
 		}		
-		return null;
-		
+		return null;	
 	}
+	
+	public Review findReview (int reviewId){
+	    StringBuilder q = new StringBuilder();
+        q.append("select reviewid, memid, title, posted, supid, content ");
+        q.append("from review ");
+        q.append("where reviewid = ? ");
+        
+        jdbcUtil.setSqlAndParameters(q.toString(), new Object[] {reviewId});
+        
+        try {
+            Review review = null;
+            ResultSet rs = jdbcUtil.executeQuery();
+            if(rs.next()) {
+                review = new Review();
+                review.setReviewId(rs.getInt("reviewid"));
+                review.setMemId(rs.getInt("memid"));
+                review.setTitle(rs.getString("title"));
+                review.setPosted(rs.getString("posted"));
+                review.setSupId(rs.getInt("supid"));
+                review.setContent(rs.getString("content"));
+            }
+            return review;
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }finally {
+            jdbcUtil.close();
+        }       
+        return null;    
+    }
+	
 	
 	public List<Review> findMemberBoard(int memID) {
 		String memQuery = query + "," + "REVIEW.REVIEWID, " +
@@ -64,7 +93,7 @@ public class ReviewDAO {
 				Review dto = new Review();
 				dto.setMemId(rs.getInt("MEMID"));
 				dto.setTitle(rs.getString("TITLE"));
-				dto.setDate(rs.getString("POSTED"));
+				dto.setPosted(rs.getString("POSTED"));
 				dto.setReviewId(rs.getInt("REVIEWID"));
 				dto.setSupId(rs.getInt("SUPID"));
 				
@@ -88,7 +117,7 @@ public class ReviewDAO {
 							"REVIEWID, SUPID) " +
 							"VALUES (?, ?, ?, reviewseq.nextval, ?)";
 		
-		Object[] param = new Object[] {brd.getMemId(), brd.getTitle(), brd.getDate(), brd.getSupId()};
+		Object[] param = new Object[] {brd.getMemId(), brd.getTitle(), brd.getPosted(), brd.getSupId()};
 		
 		jdbcUtil.setSqlAndParameters(insert, param);
 		

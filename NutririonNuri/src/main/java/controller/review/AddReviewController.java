@@ -17,6 +17,14 @@ public class AddReviewController implements Controller  {
     
     
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        if (request.getMethod().equals("GET")) {    
+            log.debug("AddReviewForm Request");
+
+            return "/review/review_write.jsp";
+        }   
+        
+        
+        
         Review review = new Review(/*내용필요*/);
         
         try {
@@ -24,12 +32,12 @@ public class AddReviewController implements Controller  {
             manager.add(review);
             
             log.debug("Create Review: {}", review);
-            return "redirect:/"; //경로 추가
+            return "redirect:/review/list";
         } catch (Exception e) {
             request.setAttribute("addFailed", true);
             request.setAttribute("exception", e);
             request.setAttribute("review", review);
-            return "/review/review_list.jsp";
+            return "/review/review_view.jsp";
         }
     }
     

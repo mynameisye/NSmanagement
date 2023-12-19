@@ -7,23 +7,23 @@
     <title>영양누리 홈페이지</title>
     <script>
 		function login() {
-			if (form.userId.value == "") {
+			if (loginForm.id.value == "") {
 				alert("사용자 ID를 입력하십시오.");
-				form.userId.focus();
+				loginForm.id.focus();
 				return false;
 			} 
-			if (form.password.value == "") {
+			if (loginForm.pwd.value == "") {
 				alert("비밀번호를 입력하십시오.");
-				form.password.focus();
+				loginForm.pwd.focus();
 				return false;
 			}		
-			form.submit();
+			loginForm.submit();
 		}
 		
 		function userCreate(targetUri) {
-			form.action = targetUri;
-			form.method="GET";		// register form 요청
-			form.submit();
+			loginForm.action = targetUri;
+			loginForm.method="GET";
+			loginForm.submit();
 		}
 		</script>
     <!-- 
@@ -84,7 +84,7 @@
 	        </header>
         </span>
         <span>
-        	<form name="loginForm" method="get" action="<c:url value='/user/login' />">
+        	<form name="loginForm" method="POST" action="<c:url value='/user/login' />">
 		        <br>
 		        <fieldset>
 		            <font size="3">
