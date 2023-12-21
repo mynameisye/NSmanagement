@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.*" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+// 현재 요청의 세션을 가져옵니다.
+HttpSession session2 = request.getSession();
+
+// 세션에 저장된 ID를 가져옵니다.
+String sessionId = session2.getId();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +71,7 @@
     	-->
         
         <span width="20%" height="164px" name="top">
-        	<a href="index.jsp" target="_top">
+        	<a href="../index.jsp" target="_top">
 		        <img src="<c:url value='/images/영양누리1.png' />" width="150" height="150"/>
 		    </a>
         </span>
@@ -83,13 +92,19 @@
 	            </div>
 	        </header>
         </span>
+        
         <span>
         	<form name="loginForm" method="POST" action="<c:url value='/user/login' />">
 		        <br>
+		        <!-- 로그인이 실패한 경우 exception 객체에 저장된 오류 메시지를 출력 -->
+        		<c:if test="${loginFailed}">
+	  	  		<br><font color="red"><c:out value="${exception.getMessage()}" /></font><br>
+	    		</c:if> 
+	    		<br>
 		        <fieldset>
 		            <font size="3">
 		                <p> 아이디 &nbsp; <input type="text" name="id" size="12" value=""> &nbsp;
-		                    <input type="submit" value="로그인"></p>
+		                    <input type="button" value="로그인" onClick="login()"></p>
 		                <p>비밀번호 <input type="password" name="pwd" size="12" value="">&nbsp;
 		                	<input type="button" value="회원가입" onClick="userCreate('<c:url value='/user/register'/>')">
 		                </p>
@@ -139,7 +154,13 @@
 		    <div align="left" width="50%" height="350px">
 		        <br/><br/><br/>
 		        <font size="5">
-		            <a href="<c:url value='/user/update' />" target="_top">• 회원정보 관리</a><br><br>
+			 		 
+  					<a href="<c:url value='/user/update'>
+	     		   <c:param name='userId' value='<%= sessionId %>'/>
+			 	 </c:url>">• 회원정보 관리</a> &nbsp;
+			 	 
+		           
+		        
 		            <a href="<c:url value='/review/list' />" target="_top">• 게시판</a> <br><br> 
 		        </font>
 		    </div>

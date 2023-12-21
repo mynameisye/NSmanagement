@@ -3,6 +3,7 @@ package controller.user;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +30,24 @@ public class RegisterUserController implements Controller {
 	    }
 
     	// POST request (회원정보가 parameter로 전송됨)
-       	User user = new User();
+//       	int year = Integer.parseInt(request.getParameter("year"));
+//        int month = Integer.parseInt(request.getParameter("month"));
+//        int day = Integer.parseInt(request.getParameter("day"));
+//       	LocalDate date = LocalDate.of(year, month, day);
+       	
+       	String mail1 = request.getParameter("mail1");
+        String mail2 = request.getParameter("mail2");
+        String mail = mail1 + "@" + mail2;
+        
+       	User user = new User(
+       	     request.getParameter("member_id"),
+       	     request.getParameter("member_pw"),
+       	     request.getParameter("member_name"),
+       	     request.getParameter("gender").charAt(0),
+       	     request.getParameter("member_phone"),
+//       	     date,
+       	     mail
+       	     );
 		
         log.debug("Create User : {}", user);
 

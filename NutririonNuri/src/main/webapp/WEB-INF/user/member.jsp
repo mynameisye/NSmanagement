@@ -13,6 +13,32 @@
             height: 600px;
         }
     </style>
+    <script>
+    function userCreate() {
+    	if (joinForm.member_id.value == "") {
+    		alert("사용자 ID를 입력하십시오.");
+    		joinForm.member_id.focus();
+    		return false;
+    	} 
+    	if (joinForm.member_pw.value == "") {
+    		alert("비밀번호를 입력하십시오.");
+    		joinForm.member_pw.focus();
+    		return false;
+    	}
+    	if (joinForm.member_pw.value != joinForm.member_pw_check.value) {
+    		alert("비밀번호가 일치하지 않습니다.");
+    		joinForm.member_name.focus();
+    		return false;
+    	}
+    	if (joinForm.member_name.value == "") {
+    		alert("이름을 입력하십시오.");
+    		joinForm.member_name.focus();
+    		return false;
+    	}
+    	joinForm.submit();
+    }
+    
+    </script>
 </head>
 
 <body>
@@ -20,7 +46,7 @@
     <center>
         <div>
             <table border="0" cellspacing="10" cellpadding="10" width="800" height="600" align="center">
-                <form method="post" action="<c:url value='/user/register' />" target="_self" name="joinForm">
+                <form name="joinForm" method="post" action="<c:url value='/user/register' />" target="_self" >
                     <tr>
                         <td align="center"><h3>회원가입</h3></td>
                         <td></td>
@@ -29,7 +55,6 @@
                         <td align="center">아이디</td>
                         <td>
                             <input type="text" size="13" name="member_id" placeholder="아이디 입력" autofocus required>&nbsp;&nbsp;
-                            <input type="button" name="idcheck" onclick="alert('중복되지 않습니다')" value="중복검사">
                         </td>
                     </tr>
                     <tr>
@@ -43,7 +68,11 @@
                     </tr>
                     <tr>
                         <td align="center">성별</td>
-                        <td><input type="radio" name="gender" value="남자">남자<input type="radio" name="gender" value="여자">여자</td>
+                        <td><input type="radio" name="gender" value="M">남자<input type="radio" name="gender" value="F">여자</td>
+                    </tr>
+                    <tr>
+                        <td align="center">전화번호</td>
+                        <td><input type="text" size="14" name="member_phone" placeholder="전화번호를 입력해 주세요" required></td>
                     </tr>
                     <tr>
                         <td align="center">생년월일</td>
@@ -68,7 +97,7 @@
                     </tr>
                     <tr>
                         <td align="center">이메일</td>
-                        <td><input type="text" size="9" name="mail">@<input type="text" size="9" name="maill" list="mail_list"> </td>
+                        <td><input type="text" size="9" name="mail1">@<input type="text" size="9" name="maill2" list="mail_list"> </td>
                         <datalist id="mail_list">
                             <option>naver.com</option>
                             <option>gmail.com</option>
@@ -80,7 +109,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" align="center">
-                            <input type="submit" value="가입하기">
+                            <input type="button" value="가입하기" onClick="userCreate()">
                             <input type="reset" value="재입력">
                         </td>
                     </tr>

@@ -3,7 +3,9 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import model.MemberInfo;
 import model.User;
+import model.dao.MemberInfoDAO;
 import model.dao.ReviewDAO;
 import model.dao.UserDAO;
 
@@ -12,11 +14,13 @@ public class UserManager {
 	private static UserManager userMan = new UserManager();
 	private UserDAO userDAO;
 	private ReviewDAO reviewDAO;
+	private MemberInfoDAO memberInfoDAO;
 
 	private UserManager() {
 		try {
 			userDAO = new UserDAO();
 			reviewDAO = new ReviewDAO();
+			memberInfoDAO = new MemberInfoDAO();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}			
@@ -35,8 +39,8 @@ public class UserManager {
 	}
 	
 	//update
-	public int update(User user) throws SQLException{
-	    return userDAO.updateUser(user);
+	public int update(MemberInfo updateMemberInfo) throws SQLException{
+	    return memberInfoDAO.updateMemberInfo(updateMemberInfo);
 	}
 	
 	//delete
@@ -60,10 +64,15 @@ public class UserManager {
 	    return userDAO.findUserList();
 	}
 
-    public void login(String userId, String password) {
-        // TODO Auto-generated method stub
-        
-    }
+	public boolean login(String userId, String password)
+	        throws SQLException, UserNotFoundException, PasswordMismatchException {
+	        User user = findUser(userId);
+
+	        if (!user.matchPassword(password)) {
+	            throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
+	        }
+	        return true;
+	    }
     
     public int remove(String userId) throws SQLException, UserNotFoundException {
         return userDAO.deleteUser(userId);

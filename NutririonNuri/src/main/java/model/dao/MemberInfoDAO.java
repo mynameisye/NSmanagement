@@ -27,7 +27,7 @@ public class MemberInfoDAO {
                         rs.getString("Disease"),
                         rs.getInt("Smoke"),
                         rs.getInt("Alchol"),                    
-                        rs.getDate("Pregnant"),
+                        rs.getInt("Pregnant"),
                         rs.getString("Medicine"),
                         rs.getString("Supplement"),
                         rs.getString("PrefIngredient"));
@@ -61,9 +61,11 @@ public class MemberInfoDAO {
     //갱신
     public int updateMemberInfo(MemberInfo memberInfo) throws SQLException {
         String sql = "UPDATE MemberInfo "
-                + "SET /*채워 넣기*/ "
+                + "SET height=?, weight=?, smoke=?, alchol=?, pregnant=?, medicine=?, supplment=?, prefingredient=? "
                 + "MemId = ? ";     
-        jdbcUtil.setSqlAndParameters(sql, new Object[] {memberInfo.getMemId()});   
+        jdbcUtil.setSqlAndParameters(sql, new Object[] {memberInfo.getHeight(), memberInfo.getWeight(), 
+                memberInfo.getSmoke(), memberInfo.getAlchol(), memberInfo.getPregnant(), memberInfo.getMedicine(),
+                memberInfo.getSupplement(), memberInfo.getPrefIngredient()});   
 
         try {               
             int result = jdbcUtil.executeUpdate();  

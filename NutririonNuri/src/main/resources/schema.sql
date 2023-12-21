@@ -41,7 +41,6 @@ CREATE TABLE Member
 	Name                 VARCHAR2(15)  NOT NULL ,
 	Gender               char(1)  NULL ,
 	Phone                CHAR(18)  NULL ,
-	ResidentNum          char(14)  NOT NULL ,
 	Birthday             date  NULL ,
 	Email                VARCHAR2(15)  NULL ,
 	Id                   VARCHAR2(15)  NOT NULL  CONSTRAINT  Validation_Rule_Id CHECK (Id >= 5),
@@ -162,3 +161,5 @@ CONSTRAINT R_5 FOREIGN KEY (SupId) REFERENCES Supplement (SupId));
 ALTER TABLE Disease
 	ADD (
 CONSTRAINT R_12 FOREIGN KEY (MemId) REFERENCES MemberInfo (MemId));
+
+COMMIT;

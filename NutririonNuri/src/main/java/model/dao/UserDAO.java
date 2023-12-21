@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.MemberInfo;
 import model.User;
 
 public class UserDAO {
@@ -18,19 +19,17 @@ public class UserDAO {
     //유저 가입(생성)
     public int addUser(User user) {
         StringBuilder query = new StringBuilder();
-        query.append("INSERT INTO Member (memid, name, id, pwd, gender, phone, email, birthday) ");
-        query.append("VALUES (?, ?, ?, ?, ?, ?, ?) ");
+        query.append("INSERT INTO Member (memid, name, id, pwd, gender, phone, email) ");
+        query.append("VALUES (memid.nextval, ?, ?, ?, ?, ?, ?) ");
         
         jdbcUtil.setSqlAndParameters(query.toString(), 
                 new Object[] {
-                        "memid.nextval",
                         user.getName(),
                         user.getId(),
                         user.getPw(),
                         user.getGender(),
                         user.getPhone(),
                         user.getEmail(),
-                        user.getBirthDay().toString(),
                         });
         try {
             int result = jdbcUtil.executeUpdate();
@@ -47,33 +46,29 @@ public class UserDAO {
     }
     
     //유저 정보 갱신
-    public int updateUser(User user) throws SQLException{
-        StringBuilder query = new StringBuilder();
-        query.append("UPDATE Member ");
-        query.append("SET pwd=?, name=?, phone=?, birthday=?, email=? ");
-        query.append("WHERE MemId = ?");
-        
-        jdbcUtil.setSqlAndParameters(query.toString(), 
-                new Object[] {
-                        user.getPw(),
-                        user.getName(),
-                        user.getPhone(),
-                        user.getBirthDay().toString(),
-                        user.getEmail(),
-                        user.getMemid()});
-        try {
-            int result = jdbcUtil.executeUpdate();
-            return result;
-        } catch (Exception ex) {
-            jdbcUtil.rollback();
-            ex.printStackTrace();
-        } finally {
-            jdbcUtil.commit();
-            jdbcUtil.close();
-        }
-        
-        return 0;
-    }
+//    public int updateMemberInfo(MemberInfo updateMemberInfo) throws SQLException{
+//        StringBuilder query = new StringBuilder();
+//        query.append("UPDATE MemberInfo ");
+//        query.append("SET height=?, weight=?, smoke=?, alchol=?, pregnant=?, medicine=?, supplment=?, prefingredient=? ");
+//        query.append("WHERE MemId = ?");
+//        
+//        jdbcUtil.setSqlAndParameters(query.toString(), 
+//                new Object[] {
+//                        
+//});
+//        try {
+//            int result = jdbcUtil.executeUpdate();
+//            return result;
+//        } catch (Exception ex) {
+//            jdbcUtil.rollback();
+//            ex.printStackTrace();
+//        } finally {
+//            jdbcUtil.commit();
+//            jdbcUtil.close();
+//        }
+//        
+//        return 0;
+//    }
     
     //유저 삭제
     public int deleteUser(String id) throws SQLException{
@@ -97,16 +92,15 @@ public class UserDAO {
     
     //유저 정보 조회
     public User findUser(String id) throws SQLException{
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT memid, pwd, name, gender, phone, birthday, email ");
-        query.append("FROM Member ");
-        query.append("WHERE MemId = ?");
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] {id});
+//        StringBuilder query = new StringBuilder();
+//        query.append("SELECT memid, pwd, name, gender, phone, birthday, email ");
+//        query.append("FROM Member ");
+//        query.append("WHERE id = ?");
+        String query = "SELECT memid, pwd, name, gender, phone, email FROM Member WHERE id=? ";
+        jdbcUtil.setSqlAndParameters(query, new Object[] {id});
         try {
             ResultSet rs = jdbcUtil.executeQuery();
             if(rs.next()) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate birth = LocalDate.parse(rs.getString("birthday"), formatter);
                 User user = new User(
                         rs.getInt("memid"),
                         id,
@@ -114,8 +108,9 @@ public class UserDAO {
                         rs.getString("name"),
                         rs.getString("gender").charAt(0),
                         rs.getString("phone"),
-                        birth,
-                        rs.getString("email"));
+                        rs.getString("email")
+                        );
+                return user;
             }
         } catch (Exception ex){
             ex.printStackTrace();
@@ -168,10 +163,9 @@ public class UserDAO {
                 String name = rs.getString("name");
                 char gender = rs.getString("gender").charAt(0);
                 String phone = rs.getString("phone");
-                LocalDate birthday = rs.getDate("birthday").toLocalDate();
                 String email = rs.getString("email");
                 
-                User user = new User(memid, id, pwd, name, gender, phone, birthday, email);
+                User user = new User(memid, id, pwd, name, gender, phone, email);
                 list.add(user);
             }
         } catch(Exception e){

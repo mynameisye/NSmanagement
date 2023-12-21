@@ -25,7 +25,7 @@ public class RequestMapping {
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/list", new ListUserController());
         mappings.put("/user/register", new RegisterUserController());
-        mappings.put("/user/update", null);
+        mappings.put("/user/update", new UpdateUserController());
         
         mappings.put("/review/list", new ListReviewController());
         mappings.put("/review/write", new AddReviewController());

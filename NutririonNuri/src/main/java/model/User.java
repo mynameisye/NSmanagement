@@ -10,31 +10,35 @@ public class User { //User
     private String name;
     private char gender; //피드백(DB설계): gender, smoke등은 char(1)로 사용
     private String phone;
-    private LocalDate birthDay;
     private String email;
     
     //생성자
     public User() {};
-    public User(int memid, String id, String pw, String name, char gender, String phone, LocalDate birthDay, String email) {
+
+    public User(String id, String pw, String name, char gender, String phone, String email) {
+        super();
+        this.id = id;
+        this.pw = pw;
+        this.name = name;
+        this.gender = gender;
+        this.phone = phone;
+        this.email = email;
+    }
+
+
+
+    public User(int memid, String id, String pw, String name, char gender, String phone,
+            String email) {
+        super();
         this.memid = memid;
         this.id = id;
         this.pw = pw;
         this.name = name;
         this.gender = gender;
         this.phone = phone;
-        this.birthDay = birthDay;
         this.email = email;
-    };
-    
-    public User(int memId, String id, String password, String name, String email, String phone) {
-        this.id = id;
-        this.memid = memId;
-        this.pw = password;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
     }
-    
+
     //getter, setter
     public int getMemid() {
         return memid;
@@ -72,16 +76,23 @@ public class User { //User
     public void setGender(char gender) {
         this.gender = gender;
     }
-    public LocalDate getBirthDay() {
-        return birthDay;
-    }
-    public void setBirthDay(LocalDate birthDay) {
-        this.birthDay = birthDay;
-    }
+    
     public String getEmail() {
         return email;
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    /* 비밀번호 검사 */
+    public boolean matchPassword(String password) {
+        if (password == null) {
+            return false;
+        }
+        return this.pw.equals(password);
+    }
+    
+    public boolean isSameUser(String userid) {
+        return id.equals(userid);
     }
 }

@@ -1,21 +1,34 @@
 package model;
 
-import java.sql.Date;
-
 public class MemberInfo {
-	private int MemId;
-	private float Height;
+    private int MemId;
+    private float Height;
     private float Weight;
     private String Disease;
     private int Smoke;
     private int Alchol;
-    private Date Pregnant;
+    private int Pregnant;
     private String Medicine;
     private String Supplement;
     private String PrefIngredient;
     
+    public MemberInfo() {};
+    
+    public MemberInfo(float height, float weight, int smoke, int alchol, int pregnant, String medicine,
+            String supplement, String prefIngredient) {
+        super();
+        Height = height;
+        Weight = weight;
+        Smoke = smoke;
+        Alchol = alchol;
+        Pregnant = pregnant;
+        Medicine = medicine;
+        Supplement = supplement;
+        PrefIngredient = prefIngredient;
+    }
+
     public MemberInfo(int memId, float height, float weight, String disease, int smoke, int alchol, 
-    		Date pregnant, String medicine, String supplement, String prefIngredient) {
+            int pregnant, String medicine, String supplement, String prefIngredient) {
         super();
         MemId = memId;
         Height = height;
@@ -33,25 +46,25 @@ public class MemberInfo {
         return MemId;
     }
     public void setMemId(int memId) {
-    	MemId = memId;
+        MemId = memId;
     }
     public float getHeight() {
         return Height;
     }
     public void setHeight(float height) {
-    	Height = height;
+        Height = height;
     }
     public float getWeight() {
         return Weight;
     }
     public void setWeight(float weight) {
-    	Weight = weight;
+        Weight = weight;
     }
     public String getDisease() {
-    	return Disease;
+        return Disease;
     }
     public void setDisease(String disease) {
-    	Disease = disease;
+        Disease = disease;
     }
     public int getSmoke() {
         return Smoke;
@@ -63,30 +76,30 @@ public class MemberInfo {
         return Alchol;
     }
     public void setSupId(int alchol) {
-    	Alchol = alchol;
+        Alchol = alchol;
     }
-    public Date getPregnant() {
-    	return Pregnant;
+    public int getPregnant() {
+        return Pregnant;
     }
-    public void setPregnant(Date pregnant ) {
-    	Pregnant = pregnant;
+    public void setPregnant(int pregnant ) {
+        Pregnant = pregnant;
     }
     public String getMedicine() {
-    	return Medicine;
+        return Medicine;
     }
     public void setMedicine(String medicine) {
-    	Medicine = medicine;
+        Medicine = medicine;
     }
     public String getSupplement() {
-    	return Supplement;
+        return Supplement;
     }
     public void setSupplement(String supplement) {
-    	Supplement = supplement;
+        Supplement = supplement;
     }
     public String getPrefIngredient() {
-    	return PrefIngredient;
+        return PrefIngredient;
     }
     public void setPrefIngredient(String prefIngredient) {
-    	PrefIngredient = prefIngredient;
+        PrefIngredient = prefIngredient;
     }
 }
