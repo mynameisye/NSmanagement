@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>새 글 작성</title>
-    <link rel="stylesheet" href="./css/css.css">
+    <link rel="stylesheet" href="<c:url value='/css/css.css'/>">
 </head>
 <body>
     <div class="board_wrap">
@@ -30,9 +30,9 @@
                 </div>
                 <div class="bt_wrap">
                     <a href="./review_view.jsp" class="on">등록</a>
-                    <input type="submit" value="등록">
+                    <!--<input type="submit" value="등록">-->
                     <a href="./review_list.jsp">취소</a>
-                    <input type="reset" value="취소">
+                    <!--<input type="reset" value="취소">-->
                 </div>
             </div>
         </form>
