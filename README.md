@@ -1,21 +1,21 @@
 ﻿<h1># NSmanagement</h1>
-2023-12-07 3:37 수정자 이윤지<br>
+2023-12-22 8:11 수정자 이윤지<br>
 <hr>
 
- <h3>[github 변경사항]<br></h3>
- -DAO, jsp 파일 등 프로젝트에 넣은 후 github에 별도 폴더로 업로드해둔 파일 삭제. 필요시 프로젝트 받아서 확인할 것<br>
+<h3>[회원가입/로그인/로그아웃]<br></h3>
+-회원가입시 MemberInfo(입력정보)와 함께 빈 MemberInfo생성
+-로그인시 로그인 창에 이름과 로그아웃 버튼 출력
+-session에 id와 name저장
 <hr>
 
- <h3>[이후 작업 필요사항]<br></h3>
- <strong>#JSP/CSS 관련<br></strong>
- -jsp page WEB-INF에 넣어 정리<br>
- -css 통일<br>
- -중복된 페이지 삭제(review_list.jsp, review_edit.jsp)<br>
- -controller와 jsp 연결<br>
- -목록 출력, 페이징 등 viewing 관련 구현<br>
+<h3>[회원정보 관리]<br></h3>
+-MemberInfo를 불러와 form에 삽입
+-수정 버튼 클릭시 DB에 반영, home으로 돌아감
+<hr>
 
- <strong>#서비스 관련<br></strong>
- -mapping 재검토<br>
- -ns관련 함수 추가 및 보완<br>
- -test data 삽입, 실행해보기<br>
- -비즈니스 로직 구현<br>
+<h3>[검색기능]<br></h3>
+-Open API등으로 데이터를 삽입/갱신하는 기능을 계획하였으나 미구현
+-임의의 data를 DB에 삽입하여 테스트
+-list에서 제목을 클릭하면 상세정보 조회 가
+-jsp 출력 불완전구현
+-검색옵션 미구
