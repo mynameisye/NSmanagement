@@ -5,22 +5,21 @@ public class NS {
     private String name;
     private String effect;
     private String ingredient;
-    private String manufacture;
+    private String manufacturer;
     private String precaution;
     private float rate;
-    private int searchVolume;
+
     
-    public NS(int supId, String name, String effect, String ingredient, String manufacture, String precaution,
-            float rate, int searchVolume) {
+    public NS(int supId, String name, String effect, String ingredient, String manufacturer, String precaution,
+            float rate) {
         super();
         this.supId = supId;
         this.name = name;
         this.effect = effect;
         this.ingredient = ingredient;
-        this.manufacture = manufacture;
+        this.manufacturer = manufacturer;
         this.precaution = precaution;
         this.rate = rate;
-        this.searchVolume = 0;
     }
 
     public int getSupId() {
@@ -47,11 +46,11 @@ public class NS {
     public void setIngredient(String ingredient) {
         this.ingredient = ingredient;
     }
-    public String getManufacture() {
-        return manufacture;
+    public String getmanufacturer() {
+        return manufacturer;
     }
-    public void setManufacture(String manufacture) {
-        this.manufacture = manufacture;
+    public void setmanufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
     public String getPrecaution() {
         return precaution;
@@ -65,12 +64,4 @@ public class NS {
     public void setRate(float rate) {
         this.rate = rate;
     }
-    public int getSearchVolume() {
-        return searchVolume;
-    }
-    public void setSearchVolume(int searchVolume) {
-        this.searchVolume = searchVolume;
-    }
-    
-    
 }

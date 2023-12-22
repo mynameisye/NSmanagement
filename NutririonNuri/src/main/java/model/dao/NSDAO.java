@@ -17,52 +17,52 @@ public class NSDAO {
 
     public List<NS> findNSList(String keyword, String option) throws SQLException {
         String sql = "";
-        if (option.equals("통합검색")) {
-            sql = "SELECT SupId, Name, Manufacture, Rate, SearchVolume " 
-                    + "FROM Supplement WHERE Name LIKE '%?%' OR Effect LIKE '%?%' "
-                    + "OR Ingredient LIKE '%?%' OR Manufacture LIKE '%?%' "
+        if (option.equals("total")) {
+            sql = "SELECT SupId, Name, Manufacturer, Rate " 
+                    + "FROM Supplement WHERE Name LIKE ? OR Effect LIKE ? "
+                    + "OR Ingredient LIKE ? OR Manufacturer LIKE ? "
                     + "ORDER BY SupId";
-            jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword, keyword, keyword, keyword});
+            jdbcUtil.setSqlAndParameters(sql, new Object[] {"%"+ keyword +"%", "%"+ keyword +"%", "%"+ keyword +"%", "%"+ keyword +"%"});
         }
-        else if (option.equals("이름")) {
-            sql = "SELECT SupId, Name, Manufacture, Rate, SearchVolume " 
-                    + "FROM Supplement WHERE Name LIKE '%?%' "
+        else if (option.equals("name")){
+            sql = "SELECT SupId, Name, Manufacturer, Rate " 
+                    + "FROM Supplement WHERE Name LIKE ? "
                     + "ORDER BY SupId";
-            jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword});
+            jdbcUtil.setSqlAndParameters(sql, new Object[] {"%"+ keyword +"%"});
         }
-        else if (option.equals("효능")) {
-            sql = "SELECT SupId, Name, Manufacture, Rate, SearchVolume " 
-                    + "FROM Supplement WHERE Effect LIKE '%?%' "
+        else if (option.equals("effect")){
+            sql = "SELECT SupId, Name, Manufacturer, Rate " 
+                    + "FROM Supplement WHERE Effect LIKE ? "
                     + "ORDER BY SupId";
-            jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword});
+            jdbcUtil.setSqlAndParameters(sql, new Object[] {"%"+ keyword +"%"});
         }
-        else if (option.equals("성분")) {
-            sql = "SELECT SupId, Name, Manufacture, Rate, SearchVolume " 
-                    + "FROM Supplement WHERE Ingredient LIKE '%?%' "
+        else if (option.equals("ingredient")){
+            sql = "SELECT SupId, Name, Manufacturer, Rate " 
+                    + "FROM Supplement WHERE Ingredient LIKE ? "
                     + "ORDER BY SupId";
-            jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword});
+            jdbcUtil.setSqlAndParameters(sql, new Object[] {"%"+ keyword +"%"});
         }
-        else {
-            sql = "SELECT SupId, Name, Manufacture, Rate, SearchVolume " 
-                    + "FROM Supplement WHERE Manufacture LIKE '%?%' "
+        else if (option.equals("manufacturer")){
+            sql = "SELECT SupId, Name, Manufacturer, Rate " 
+                    + "FROM Supplement WHERE Manufacturer LIKE ? "
                     + "ORDER BY SupId";
-            jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword});
+            jdbcUtil.setSqlAndParameters(sql, new Object[] {"%"+ keyword +"%"});
         }
+      
 
         try {
             ResultSet rs = jdbcUtil.executeQuery();               
-            List<NS> nsList = new ArrayList<NS>();    
+            List<NS> nsList = new ArrayList<NS>(); 
             while (rs.next()) {
                 NS ns = new NS(           
                         rs.getInt("SupId"),
                         rs.getString("Name"),
                         null,
                         null,
-                        rs.getString("Manufacture"),
+                        rs.getString("Manufacturer"),
                         null,
-                        rs.getFloat("Rate"),
-                        rs.getInt("SearchVolume") + 1);
-                nsList.add(ns);            
+                        rs.getFloat("Rate"));
+                nsList.add(ns); 
             }       
             return nsList;                    
 
@@ -75,10 +75,10 @@ public class NSDAO {
     }
 
     public NS findNS(int nsId) throws SQLException {
-        String sql = "SELECT Name, Effect, Ingredient, Manufacture, Precaution, Rate "
+        String sql = "SELECT Name, Effect, Ingredient, Manufacturer, Precaution, Rate "
                 + "FROM Supplement WHERE SupId=? ";
         jdbcUtil.setSqlAndParameters(sql, new Object[] {nsId});   
-
+        
         try {
             ResultSet rs = jdbcUtil.executeQuery();     
             if (rs.next()) {                        
@@ -87,10 +87,10 @@ public class NSDAO {
                         rs.getString("Name"),
                         rs.getString("Effect"),
                         rs.getString("Ingredient"),
-                        rs.getString("Manufacture"),
+                        rs.getString("Manufacturer"),
                         rs.getString("Precaution"),                    
-                        rs.getFloat("Rate"),
-                        0);
+                        rs.getFloat("Rate")
+                        );
                 return ns;
             }
         } catch (Exception ex) {
@@ -102,8 +102,8 @@ public class NSDAO {
     }
 
     public int addNS(int MemId, NS ns) throws SQLException {
-        String sql = "INSERT INTO TakingSupplement VALUES (IntakeInform_seq.nextval, ?, ?, ?, ?, ?, ?, ?)";
-        Object[] param = new Object[] { null, null, ns.getPrecaution(), null, ns.getSupId(), MemId, ns.getSearchVolume() };              
+        String sql = "INSERT INTO TakingSupplement VALUES (IntakeInform_seq.nextval, ?, ?, ?, ?, ?, ?)";
+        Object[] param = new Object[] { null, null, ns.getPrecaution(), null, ns.getSupId(), MemId };              
         jdbcUtil.setSqlAndParameters(sql, param);   
 
         try {               
@@ -162,7 +162,7 @@ public class NSDAO {
 
     public List<NS> findMyNSList(int MemId) throws SQLException {
 
-        String sql = "SELECT SupId, Name, Manufacture, Rate " 
+        String sql = "SELECT SupId, Name, Manufacturer, Rate " 
                 + "FROM TakingSupplement t JOIN Supplement s ON t.SupId = s.SupId "
                 + "WHERE MemId = ? ORDER BY SupId";
         jdbcUtil.setSqlAndParameters(sql, new Object[] {MemId});
@@ -176,10 +176,10 @@ public class NSDAO {
                         rs.getString("Name"),
                         null,
                         null,
-                        rs.getString("Manufacture"),
+                        rs.getString("Manufacturer"),
                         null,
-                        rs.getFloat("Rate"),
-                        0);
+                        rs.getFloat("Rate")
+                        );
                 nsList.add(ns);             
             }       
             return nsList;                    
@@ -218,7 +218,7 @@ public class NSDAO {
     }
 
     public List<NS> findStarList() throws SQLException {
-        String sql = "SELECT SupId, Name, Manufacture, Rate " 
+        String sql = "SELECT SupId, Name, Manufacturer, Rate " 
                 + "FROM Supplement "
                 + "ORDER BY Rate DESC, SupId ASC";
         jdbcUtil.setSqlAndParameters(sql, null);
@@ -232,10 +232,10 @@ public class NSDAO {
                         rs.getString("Name"),
                         null,
                         null,
-                        rs.getString("Manufacture"),
+                        rs.getString("Manufacturer"),
                         null,
-                        rs.getFloat("Rate"),
-                        0);
+                        rs.getFloat("Rate")
+                        );
                 nsList.add(ns);             
             }       
             return nsList;                    
@@ -277,7 +277,7 @@ public class NSDAO {
     }
     
     public List<NS> findSearchList() throws SQLException {
-        String sql = "SELECT SupId, Name, Manufacture, Rate, SearchVolume " 
+        String sql = "SELECT SupId, Name, Manufacturer, Rate, SearchVolume " 
                 + "FROM Supplement "
                 + "ORDER BY SearchVolume DESC, SupId ASC";
         jdbcUtil.setSqlAndParameters(sql, null);
@@ -291,10 +291,9 @@ public class NSDAO {
                         rs.getString("Name"),
                         null,
                         null,
-                        rs.getString("Manufacture"),
+                        rs.getString("Manufacturer"),
                         null,
-                        rs.getFloat("Rate"),
-                        rs.getInt("SearchVolume"));
+                        rs.getFloat("Rate"));
                 nsList.add(ns);             
             }       
             return nsList;                    

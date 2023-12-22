@@ -1,62 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>검색결과</title>
-    <link rel="stylesheet" href="./css/css.css">
+    <link rel=stylesheet href="<c:url value='/css/css.css' />" type="text/css">
     <style>
-        select, input {
-            padding: 10px;
-            box-sizing: border-box;
-            border: 0px;
-            outline: none;
+        .search_list{
+        	font-size: 15px;
         }
-        input[type="text"] {
-            width: 60%;
-        }
-        input[type="submit"]{
-            float: right;
-            background-color: black;
-            color: white;
+        .title{
+        	font-size: 20px;
+        	font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="board_wrap">
+	<span width="20%" height="164px" name="top"> <a
+		href="<c:url value='/' />" target="_top"> <img
+			src="<c:url value='/images/영양누리1.png' />" width="150" height="150" />
+	</a>
+	</span>
+	<div class="board_wrap">
         <div class="board_title">
             <strong>검색결과</strong>
         </div>
-        <div class="board_list_wrap">
-            <div class="search_list">
+        <div class="board_list_wrap" align="center">
+            <div class="search_list"><hr>
                 <!--해당 블럭을 기준으로 jsp로 db에서 데이터 적용할 수 있도록 jsp작성시 코드 수정-->
-                <div>
-                    <div class="title"><a href="./ns_view.jsp">제목(db 사용)</a></div>
-                    <div class="date">yyyy-mm-dd</div>
-                    <br/>
-                    <div class="preview">본문내용(간략)</div>
-                </div>
-                <div>
-                    <div class="title"><a href="./ns_view.jsp">제목(db 사용)</a></div>
-                    <div class="date">yyyy-mm-dd</div>
-                    <br/>
-                    <div class="preview">본문내용(간략)</div>
-                </div>
-            </div>
-            <div class="board_page">
-                <!--jsp 사용하여 상황에 맞게 작동하도록 수정-->
-                <a href="#" class="bt first"><<</a>
-                <a href="#" class="bt prev"><</a>
-                <a href="#" class="num on">1</a>
-                <a href="#" class="num">2</a>
-                <a href="#" class="num">3</a>
-                <a href="#" class="num">4</a>
-                <a href="#" class="num">5</a>
-                <a href="#" class="bt next">></a>
-                <a href="#" class="bt last">>></a>
-            </div>
+				<c:forEach var="ns" items="${nsList}">
+					<br>
+					<div class="title">
+						<a href="<c:url value='/ns/view'>
+							<c:param name='nsId' value='${ns.supId}'/></c:url>">
+							${ns.name}
+						</a>
+					</div>
+					<br><br>
+					<div class="manufacture">제조사 : ${ns.manufacturer}</div><br>
+					<div class="rate">평점 : ${ns.rate}</div><br><hr>
+				</c:forEach>
+			</div>
         </div>
     </div>
 </body>

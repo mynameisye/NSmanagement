@@ -21,6 +21,10 @@ img .logo{
 	width: 200px;
 	height: 280px;
 }
+.page_title{
+	font-size: x-large;
+	padding: 10px
+}
 
 /*검색창 관련*/
 .search_wrap{
@@ -65,10 +69,16 @@ div #menu{
 }
 
 div #content{
-	text-align: center;
+	text-align: left;
 	width: 79%;
 	height: inherit;
 	font-size: x-large;
+}
+#ranking{
+	margin: 2rem;
+}
+#ranking > tr, td{
+	padding: 2rem;
 }
 
 form[name='loginForm']{

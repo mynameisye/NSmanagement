@@ -56,7 +56,7 @@ String userName = (String)session.getAttribute("curUserName");
         <span>
         	<center>
         	<div class="search_wrap"">
-                <form name="search" action="./ns/search_list.jsp">
+                <form name="search" method="POST" action="<c:url value='/ns/list' />">
                     <select name="searchOption">
                         <option value="total">통합검색</option>
                         <option value="name">이름</option>
@@ -80,28 +80,25 @@ String userName = (String)session.getAttribute("curUserName");
         <iframe src="./menu.jsp" width="20%" height="800px" name="right" frameborder="0" scrolling="no"></iframe> 
 	     -->
 	    <div class='inline' id="content">
-			<div>
-				<p align="center">영양제 랭킹</p>
-				<table border="0" cellspacing="0" cellpadding="10" width="1300"
-					height="200" align="center">
-					<tr>
-						<td>1위 - SAT</td>
-						<td><img src="<c:url value='/images/1.PNG'/>"></img></td>
-						<td>2위 - 트리플 스트렝스 오메가3 피쉬오일(오메가3 1040mg)</td>
-						<td><img src="<c:url value='/images/2.PNG'/>"></img></td>
-						<td align="center">3위 - 칼슘 마그네슘 말레이트</td>
-						<td><img src="<c:url value='/images/3.PNG' />"></img></td>
-					</tr>
-					<tr>
-						<td>4위 - 락토비프 프로바이오틱스 300억</td>
-						<td><img src="<c:url value='/images/4.PNG' />"></img></td>
-						<td>5위 - 트리플 스트렝스 오메가3 피쉬오일(오메가3 1055mg)</td>
-						<td><img src="<c:url value='/images/5.PNG' />"></img></td>
-						<td>6위 - 비타민C 1000</td>
-						<td><img src="<c:url value='/images/6.PNG' />"></img></td>
-					</tr>
-				</table>
-			</div>
+			<p align="center">영양제 랭킹</p>
+			<table id='ranking'>
+				<tr>
+					<td>1위 - SAT</td>
+					<td><img src="<c:url value='/images/1.PNG'/>"></img></td>
+					<td>2위 - 트리플 스트렝스 오메가3 피쉬오일(오메가3 1040mg)</td>
+					<td><img src="<c:url value='/images/2.PNG'/>"></img></td>
+					<td align="center">3위 - 칼슘 마그네슘 말레이트</td>
+					<td><img src="<c:url value='/images/3.PNG' />"></img></td>
+				</tr>
+				<tr>
+					<td>4위 - 락토비프 프로바이오틱스 300억</td>
+					<td><img src="<c:url value='/images/4.PNG' />"></img></td>
+					<td>5위 - 트리플 스트렝스 오메가3 피쉬오일(오메가3 1055mg)</td>
+					<td><img src="<c:url value='/images/5.PNG' />"></img></td>
+					<td>6위 - 비타민C 1000</td>
+					<td><img src="<c:url value='/images/6.PNG' />"></img></td>
+				</tr>
+			</table>
 		</div>
 
 		<div class='inline' id='menu'>
@@ -129,9 +126,11 @@ String userName = (String)session.getAttribute("curUserName");
 		    </form>
 		    <br>
 		    
-	 		<a href="<c:url value='/user/update'>
-    		   		<c:param name='userId' value='${userId}'/>
-    		   	</c:url>"> • 회원정보 관리</a><br>
+		    <c:if test="${curUserId != null}">
+	 			<a href="<c:url value='/user/update'>
+    		   			<c:param name='userId' value='${userId}'/>
+    		   		</c:url>"> • 회원정보 관리</a><br>
+    		</c:if>
             <a href="<c:url value='/review/list' />" target="_top">• 게시판</a> 
 		</div>
 	</div>

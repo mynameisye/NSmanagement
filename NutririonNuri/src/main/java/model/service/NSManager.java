@@ -41,4 +41,7 @@ public class NSManager {
     //calStarRate
     //findSearchList
     //findStarList
+    public List<NS> findStarList() throws SQLException {
+        return nsDAO.findStarList();
+    }
 }
