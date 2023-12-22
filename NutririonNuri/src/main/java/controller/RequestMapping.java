@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import controller.NS.*;
 import controller.user.*;
-import controller.review.*;
 import controller.*;
 
 public class RequestMapping {
@@ -27,11 +26,6 @@ public class RequestMapping {
         mappings.put("/user/list", new ListUserController());
         mappings.put("/user/register", new RegisterUserController());
         mappings.put("/user/update", new UpdateUserController());
-        
-        mappings.put("/review/list", new ListReviewController());
-        mappings.put("/review/write", new AddReviewController());
-        mappings.put("/review/update", new UpdateReviewController());
-        mappings.put("/review/delete", new DeleteReviewController());
         
         mappings.put("/ns/list", new SearchNSController());
         mappings.put("/ns/view", new ViewNSController());

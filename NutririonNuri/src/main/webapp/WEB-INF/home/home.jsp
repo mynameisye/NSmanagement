@@ -130,8 +130,7 @@ String userName = (String)session.getAttribute("curUserName");
 	 			<a href="<c:url value='/user/update'>
     		   			<c:param name='userId' value='${userId}'/>
     		   		</c:url>"> • 회원정보 관리</a><br>
-    		</c:if>
-            <a href="<c:url value='/review/list' />" target="_top">• 게시판</a> 
+    		</c:if> 
 		</div>
 	</div>
 	

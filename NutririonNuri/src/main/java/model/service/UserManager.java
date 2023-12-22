@@ -6,20 +6,17 @@ import java.util.List;
 import model.MemberInfo;
 import model.User;
 import model.dao.MemberInfoDAO;
-import model.dao.ReviewDAO;
 import model.dao.UserDAO;
 
 
 public class UserManager {
 	private static UserManager userMan = new UserManager();
 	private UserDAO userDAO;
-	private ReviewDAO reviewDAO;
 	private MemberInfoDAO memberInfoDAO;
 
 	private UserManager() {
 		try {
 			userDAO = new UserDAO();
-			reviewDAO = new ReviewDAO();
 			memberInfoDAO = new MemberInfoDAO();
 		} catch (Exception e) {
 			e.printStackTrace();

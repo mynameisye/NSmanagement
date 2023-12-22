@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import model.NS;
-import model.TakingSupplement;
 
 public class NSDAO {
     private JDBCUtil jdbcUtil = null;
@@ -184,31 +183,6 @@ public class NSDAO {
             }       
             return nsList;                    
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            jdbcUtil.close();       
-        }
-        return null;
-    }
-
-    public TakingSupplement findMyNS(int MemId, NS ns) throws SQLException {
-        String sql = "SELECT IntakeInform, IntakeTime, IntakeAmount, Rate "
-                + "FROM TakingSupplement WHERE MemId=? AND SupId=? ";
-        jdbcUtil.setSqlAndParameters(sql, new Object[] {MemId, ns.getSupId()});   
-
-        try {
-            ResultSet rs = jdbcUtil.executeQuery();     
-            if (rs.next()) {                        
-                TakingSupplement ts = new TakingSupplement(
-                        rs.getInt("IntakeInform"),
-                        rs.getDate("IntakeTime"),
-                        rs.getInt("IntakeAmount"),
-                        rs.getFloat("Rate"),
-                        ns.getSupId(),
-                        MemId);
-                return ts;
-            }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
