@@ -16,6 +16,86 @@ a {
     color: inherit;
 }
 
+/*로고*/
+img .logo{
+	width: 200px;
+	height: 280px;
+}
+
+/*검색창 관련*/
+.search_wrap{
+	display: inline-block;
+    margin: auto;
+    height: max-content;
+    width: 500px;
+    border: 1px solid black;
+    background: white;
+}
+.search_wrap > form > input, select{
+	padding: 10px;
+    box-sizing: border-box;
+    border: 0px;
+    outline: none;
+}
+.search_wrap > form > input[type="text"] {
+    width: 60%;
+}
+.search_wrap > form > input[type="submit"]{
+    float: right;
+    background-color: black;
+    color: white;
+}
+
+/*body 관련*/
+div[name='body']{
+	height: 750px;
+}
+
+div .inline{
+	display: inline-block;
+}
+
+div #menu{
+	text-align: left;
+	align-self: auto;
+	font-size: x-large;
+	width: 20%;
+	height: inherit;
+	padding: 5px;
+}
+
+div #content{
+	text-align: center;
+	width: 79%;
+	height: inherit;
+	font-size: x-large;
+}
+
+form[name='loginForm']{
+	font-size: medium;
+}
+fieldset{
+	padding: 10px;
+}
+
+div[name='tail']{
+	margin: 20px, 0px;
+	padding: 5px;
+}
+
+/*링크*/
+a:link {
+	color: #EB81A7;
+	text-decoration: none;
+}
+a:visited {
+	color: #FBADB9;
+}
+a:hover {
+	color: pink;
+}
+
+/*게시판 관련*/
 .board_wrap {
     width: 1000px;
     margin: 100px auto;
@@ -32,6 +112,20 @@ a {
 .board_title p {
     margin-top: 5px;
     font-size: 1.4rem;
+}
+
+/*버튼 관련*/
+input[type='button']{
+	width: 50pt;
+	text-align: center;
+	padding: 5px;
+    box-sizing: border-box;
+    border: 0px;
+    outline: none;
+}
+input[value='로그인']{
+	color: white;
+	background-color: black;
 }
 
 .bt_wrap {

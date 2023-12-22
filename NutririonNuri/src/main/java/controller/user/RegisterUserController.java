@@ -3,9 +3,6 @@ package controller.user;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.time.LocalDate;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
+import model.MemberInfo;
 import model.User;
 import model.service.ExistingUserException;
 import model.service.UserManager;
@@ -30,10 +28,6 @@ public class RegisterUserController implements Controller {
 	    }
 
     	// POST request (회원정보가 parameter로 전송됨)
-//       	int year = Integer.parseInt(request.getParameter("year"));
-//        int month = Integer.parseInt(request.getParameter("month"));
-//        int day = Integer.parseInt(request.getParameter("day"));
-//       	LocalDate date = LocalDate.of(year, month, day);
        	
        	String mail1 = request.getParameter("mail1");
         String mail2 = request.getParameter("mail2");
@@ -45,7 +39,6 @@ public class RegisterUserController implements Controller {
        	     request.getParameter("member_name"),
        	     request.getParameter("gender").charAt(0),
        	     request.getParameter("member_phone"),
-//       	     date,
        	     mail
        	     );
 		
@@ -54,9 +47,12 @@ public class RegisterUserController implements Controller {
 		try {
 			UserManager manager = UserManager.getInstance();
 			manager.create(user);
-	        return "redirect:/home";	// 성공 시 사용자 리스트 화면으로 redirect
+			User user2 = manager.findUser(user.getId());
+			manager.createMemberInfo(user2.getMemid());
+			
+	        return "redirect:/home";
 	        
-		} catch (ExistingUserException e) {	// 예외 발생 시 회원가입 form으로 forwarding
+		} catch (ExistingUserException e) {
             request.setAttribute("registerFailed", true);
 			request.setAttribute("exception", e);
 			request.setAttribute("user", user);

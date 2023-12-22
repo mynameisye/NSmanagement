@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>리뷰글</title>
-    <link rel="stylesheet" href="./css/css.css">
+    <link rel="stylesheet" href="<c:url value='/css/css.css'/>">
 </head>
 <body>
     <div class="board_wrap">

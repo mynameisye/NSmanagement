@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>리뷰 게시판</title>
-    <link rel="stylesheet" href="./css/css.css">
+    
+    <link rel="stylesheet" href="<c:url value='/css/css.css'/>">
     <style>
         select, input {
             padding: 10px;
@@ -55,14 +56,14 @@
                 <!--해당 블럭을 기준으로 jsp로 db에서 데이터 적용할 수 있도록 코드 수정-->
                 <div>
                     <div class="num">1</div>
-                    <div class="title"><a href="./review_view.jsp">제목</a></div>
+                    <div class="title"><a href="<c:url value='/review/review_view.jsp'/>">제목</a></div>
                     <div class="writer">작성자</div>
                     <div class="date">작성일</div>
                     <div class="count">1</div>
                 </div>
                 <div>
                     <div class="num">2</div>
-                    <div class="title"><a href="./review_view.jsp">db에서 불러오는 코드 필요</a></div>
+                    <div class="title"><a href="<c:url value='/review/review_view.jsp'/>">db에서 불러오는 코드 필요</a></div>
                     <div class="writer">작성자</div>
                     <div class="date">작성일</div>
                     <div class="count">조회</div>
@@ -82,7 +83,7 @@
             </div>
             <div class="bt_wrap">
                 <!--해당 버튼(링크) 클릭시 db에 등록하고 등록된 게시글을 보여줌-->
-                <a href="./review_write.jsp" class="on">등록</a>
+                <a href="<c:url value='/review/write'/>" class="on">등록</a>
                 <!--<a href="#">수정</a>-->
             </div>
         </div>

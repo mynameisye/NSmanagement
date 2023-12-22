@@ -38,9 +38,13 @@ public class UserManager {
 	    return userDAO.addUser(user);
 	}
 	
+	public int createMemberInfo(int memId) throws SQLException {
+	    return memberInfoDAO.createMemberInfo(memId);
+	}
+	
 	//update
-	public int update(MemberInfo updateMemberInfo) throws SQLException{
-	    return memberInfoDAO.updateMemberInfo(updateMemberInfo);
+	public int update(MemberInfo updateMemberInfo, String id) throws SQLException{
+	    return memberInfoDAO.updateMemberInfo(updateMemberInfo, id);
 	}
 	
 	//delete
@@ -76,5 +80,9 @@ public class UserManager {
     
     public int remove(String userId) throws SQLException, UserNotFoundException {
         return userDAO.deleteUser(userId);
+    }
+    
+    public MemberInfo findMemberInfo(int memId) throws SQLException{
+        return memberInfoDAO.findMemberInfo(memId);
     }
 }

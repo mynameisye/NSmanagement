@@ -3,13 +3,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	User user = (User)request.getAttribute("user");
+	MemberInfo memberInfo = (MemberInfo)request.getAttribute("memberInfo");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>member</title>
-<script>
+	<script>
 	function toggleTextbox(textboxId) {
 		var textbox = document.getElementById(textboxId);
 		var checkbox = document.getElementsByName(textboxId.substring(0,
@@ -21,45 +22,64 @@
 			textbox.disabled = true;
 		}
 	}
-	function userModify() {
-		form.submit();
+	</script>
+	<style>
+	table {
+		border-collapse: collapse;
+		width: 550px;
+		height: 700px;
+		margin-left: auto;
+		margin-right: auto;
 	}
-</script>
-<style>
-table {
-	border-collapse: collapse;
-	width: 550px;
-	height: 700px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-table, tr, td {
-	border: 0.5px solid;
-}
-
-#name {
-	text-align: center;
-	width: 80px;
-	font-weight: bold;
-	<!--background-color: #bcbcbc;-->
-}
-
-input.imageAlign {
-	vertical-align: middle;
-}
-
-#bottom {
-	text-align: center;
-	<!--background-color: #bcbcbc;-->
-}
-</style>
+	
+	table, tr, td {
+		border: 0.5px solid;
+	}
+	
+	#name {
+		text-align: center;
+		width: 80px;
+		font-weight: bold;
+	}
+	
+	input.imageAlign {
+		vertical-align: middle;
+	}
+	
+	#bottom {
+		text-align: center;
+		<!--background-color: #bcbcbc;-->
+	}
+	#title{
+		color: white;
+		background-color: black;
+		text-align: center;
+		width: 80px;
+		font-weight: bold;
+	}
+	input .button{
+		width: 50pt;
+		text-align: center;
+		padding: 10px;
+	    box-sizing: border-box;
+	    border: 0px;
+	    outline: none;
+	}
+	input[type='submit']{
+	    color: white;
+	    background-color: black;
+	}
+	input[type='button']{
+	    color: white;
+	    background-color: gray;
+	}
+	</style>
 </head>
 <body>
 	<form name="updateForm" method="post" action="<c:url value='/user/update' />" target="_self" >
 		<table>
 			<tr>
-				<td id="name" colspan="2">개인정보 관리</td>
+				<td id="title" colspan="2" >개인정보 관리</td>
 			</tr>
 			<tr>
 				<td id="name">이름</td>
@@ -82,22 +102,21 @@ input.imageAlign {
 			<tr>
 				<td id="name">성별</td>
 				<td>
-				<c:if test="<%=user.getGender() == 'M'%>">
-				<input type="radio" name="gender" value=0 checked readonly>남&emsp;
-				<input type="radio" name="gender" value=1 readonly>여
-				</c:if>
-				<c:if test="<%=user.getGender() == 'F'%>">
-				<input type="radio" name="gender" value=0 readonly>남&emsp;
-				<input type="radio" name="gender" value=1 checked readonly>여</c:if>
+					<c:if test="<%=user.getGender() == 'M'%>">
+					<input type="radio" name="gender" value=0 checked readonly>남&emsp;
+					<input type="radio" name="gender" value=1 readonly>여</c:if>
+					<c:if test="<%=user.getGender() == 'F'%>">
+					<input type="radio" name="gender" value=0 readonly>남&emsp;
+					<input type="radio" name="gender" value=1 checked readonly>여</c:if>
 				</td>
 			</tr>
 			<tr>
 				<td id="name">키(cm)</td>
-				<td><input type="text" name="height"></td>
+				<td><input type="text" name="height" value="<%= memberInfo.getHeight() %>"></td>
 			</tr>
 			<tr>
 				<td id="name">몸무게(kg)</td>
-				<td><input type="text" name="weight"></td>
+				<td><input type="text" name="weight" value="<%= memberInfo.getWeight() %>"></td>
 			</tr>
 			<tr>
 				<td id="name">기저질환</td>
@@ -117,32 +136,45 @@ input.imageAlign {
 			</tr>
 			<tr>
 				<td id="name">임신과<br>최근 임신</td>
-				<td><input type="checkbox" name="pregnant" onclick="toggleTextbox('pregnantTextbox')"><br> 
-				임신	기간: <input type="text" name="pregnantText" id="pregnantTextbox" disabled></td>
+				<c:choose>
+    				<c:when test="<%=memberInfo.getPregnant() == 'o'%>">
+						<td><input type="checkbox" name="pregnant" onclick="toggleTextbox('pregnantTextbox')" checked><br> </td></c:when>
+					<c:otherwise>
+						<td><input type="checkbox" name="pregnant" onclick="toggleTextbox('pregnantTextbox')"><br> </td></c:otherwise>
+				</c:choose>
 			</tr>
 			<tr>
 				<td id="name">흡연 여부</td>
-				<td><input type="checkbox" name="smoke" onclick="toggleTextbox('smokeTextbox')"><br>
-				</td>
+				<c:if test="<%=memberInfo.getSmoke() == 'o'%>">
+				<td><input type="checkbox" name="smoke" onclick="toggleTextbox('smokeTextbox')" checked><br></td></c:if>
+				<c:if test="<%=memberInfo.getSmoke() != 'o'%>">
+				<td><input type="checkbox" name="smoke" onclick="toggleTextbox('smokeTextbox')"><br></td></c:if>
 			</tr>
 			<tr>
 				<td id="name">음주 여부</td>
-				<td><input type="checkbox" name="alchol" onclick="toggleTextbox('alcoholTextbox')"><br>
-				</td>
+				<c:if test="<%=memberInfo.getAlchol() == 'o'%>">
+				<td><input type="checkbox" name="alchol" onclick="toggleTextbox('alcoholTextbox')" checked><br></td></c:if>
+				<c:if test="<%=memberInfo.getAlchol() != 'o'%>">
+				<td><input type="checkbox" name="alchol" onclick="toggleTextbox('alcoholTextbox')"><br></td></c:if>
 			</tr>
 			<tr>
 				<td id="name">복용 중인 처방약</td>
-				<td>약 종류: <input type="text" name="medicine"><br> 
-				</td>
+				<c:if test="<%=memberInfo.getMedicine() != null%>">
+				<td>약 종류: <input type="text" name="medicine" value="<%= memberInfo.getMedicine() %>"><br></td></c:if>
+				<c:if test="<%=memberInfo.getMedicine() == null%>">
+				<td>약 종류: <input type="text" name="medicine"><br></td></c:if>
 			</tr>
 			<tr>
 				<td id="name">복용 중인 영양제</td>
-				<td>약 종류: <input type="text" name="supplement"><br> 
-				</td>
+				<c:if test="<%=memberInfo.getSupplement() != null%>">
+				<td>약 종류: <input type="text" name="supplement" value="<%= memberInfo.getSupplement() %>"><br></td></c:if>
+				<c:if test="<%=memberInfo.getSupplement() == null%>">
+				<td>약 종류: <input type="text" name="supplement"><br></td></c:if>
 			</tr>
 			<tr>
 				<td id="name">선호하는 성분</td>
-				<td><input type="checkbox" name="favor" value=0>비타민 
+				<td>
+					<input type="checkbox" name="favor" value=0>비타민 
 					<input type="checkbox" name="favor" value=1>루테인 
 					<input type="checkbox" name="favor" value=2>칼슘 
 					<input type="checkbox" name="favor" value=3>마그네슘 
@@ -157,8 +189,8 @@ input.imageAlign {
 			</tr>
 			<tr>
 				<td id="bottom" colspan="2">
-				<input type="button" value="저장하기" onClick="userModify()">&emsp;
-				<input type="reset" value="취소하기"></td>
+				<input class='button' type="submit" value="저장하기">&emsp;
+				<input class='button' type="button" value="취소하기"></td>
 			</tr>
 		</table>
 	</form>

@@ -6,6 +6,7 @@
 <head>
     <title>영양누리 회원가입</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="<c:url value='/css/css.css'/>">
     <style>
         div {
             border: 5px solid;
@@ -97,15 +98,15 @@
                     </tr>
                     <tr>
                         <td align="center">이메일</td>
-                        <td><input type="text" size="9" name="mail1">@<input type="text" size="9" name="maill2" list="mail_list"> </td>
-                        <datalist id="mail_list">
+                        <td><input type="text" size="9" name="mail1">@ 
+                        <select name="mail2">
                             <option>naver.com</option>
                             <option>gmail.com</option>
                             <option>hanmail.net</option>
                             <option>daum.net</option>
                             <option>natet.com</option>
                             <option>직접입력</option>
-                        </datalist>
+                        </select></td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center">
