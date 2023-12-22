@@ -6,12 +6,22 @@
 <head>
     <title>영양누리 회원가입</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="<c:url value='/css/css.css'/>">
+    
     <style>
         div {
             border: 5px solid;
             width: 800px;
             height: 600px;
+        }
+        input[type="button"] {
+        	padding: 5px;
+            background-color: black;
+            color: white;
+        }
+        input[type="reset"]{
+        	padding: 5px;
+            background-color: gray;
+            color: white;
         }
     </style>
     <script>
@@ -104,7 +114,7 @@
                             <option>gmail.com</option>
                             <option>hanmail.net</option>
                             <option>daum.net</option>
-                            <option>natet.com</option>
+                            <option>nate.com</option>
                             <option>직접입력</option>
                         </select></td>
                     </tr>

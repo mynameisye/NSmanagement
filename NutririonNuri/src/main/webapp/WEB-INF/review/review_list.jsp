@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>리뷰 게시판</title>
-    
+    <title>리뷰 게시판</title> 
     <link rel="stylesheet" href="<c:url value='/css/css.css'/>">
     <style>
-        select, input {
+        .search_wrap > form > select, input {
             padding: 10px;
             box-sizing: border-box;
             border: 0px;
@@ -33,6 +33,11 @@
     </style>
 </head>
 <body>
+	<span>
+       	<a href="<c:url value='/home'/>" target="_top">
+	        <img class="logo" src="<c:url value='/images/영양누리1.png' />" width="150" height="150"/>
+	    </a>
+    </span>
     <div class="board_wrap">
         <div class="board_title">
             <strong>리뷰</strong>

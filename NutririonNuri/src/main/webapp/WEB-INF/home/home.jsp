@@ -134,13 +134,14 @@ String userName = (String)session.getAttribute("curUserName");
             <a href="<c:url value='/review/list' />" target="_top">• 게시판</a> 
 		</div>
 	</div>
-
+	
+	<hr><br>
+	
     <div name='tail'>
     	<!--
     	<iframe src="./bottom.jsp" width="100%" height="25px" name="bottom" frameborder="0" scrolling="no"></iframe>  
-    	-->
-    	<hr><br>
-        <p><font size="2">영양누리(대표:천지창조) Call:010-1234-4567 E-mail:db0207@naver.com</font></p>
+    	-->	
+        영양누리(대표:천지창조) Call:010-1234-4567 E-mail:db0207@naver.com
     </div>
 </body>
 </html>
