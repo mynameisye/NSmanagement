@@ -1,4 +1,3 @@
-
 DROP SEQUENCE DiseaseId;
 
 CREATE SEQUENCE DiseaseId
@@ -33,33 +32,32 @@ DROP TABLE Review CASCADE CONSTRAINTS PURGE;
 
 DROP TABLE Supplement CASCADE CONSTRAINTS PURGE;
 
-DROP TABLE Member CASCADE CONSTRAINTS PURGE;
+DROP TABLE Memeber CASCADE CONSTRAINTS PURGE;
 
-CREATE TABLE Member
+CREATE TABLE Memeber
 (
 	MemId                integer  NOT NULL ,
 	Name                 VARCHAR2(15)  NOT NULL ,
 	Gender               char(1)  NULL ,
 	Phone                CHAR(18)  NULL ,
-	Birthday             date  NULL ,
 	Email                VARCHAR2(15)  NULL ,
-	Id                   VARCHAR2(15)  NOT NULL  CONSTRAINT  Validation_Rule_Id CHECK (Id >= 5),
-	Pwd                  VARCHAR2(15)  NOT NULL  CONSTRAINT  Validation_Rule_Pwd CHECK (Pwd >= 8)
+	Id                   VARCHAR2(15)  NOT NULL ,
+	Pwd                  VARCHAR2(15)  NOT NULL 
 );
 
-CREATE UNIQUE INDEX XPKMemeber ON Member
+CREATE UNIQUE INDEX XPKMemeber ON Memeber
 (MemId   ASC);
 
-ALTER TABLE Member
+ALTER TABLE Memeber
 	ADD CONSTRAINT  XPKMemeber PRIMARY KEY (MemId);
 
 CREATE TABLE MemberInfo
 (
-	Height               float  NULL  CONSTRAINT  Validation_Rule_Height CHECK (Height >= 0),
-	Weight               float  NULL  CONSTRAINT  Validation_Rule_Weight CHECK (Weight >= 0),
-	Smoke                char(1)  NULL ,
-	Alchol               char(1)  NULL ,
-	Pregnant             char(1)  NULL ,
+	Height               float  NULL ,
+	Weight               float  NULL ,
+	Smoke                VARCHAR2(1)  NULL ,
+	Alchol               VARCHAR2(1)  NULL ,
+	Pregnant             VARCHAR2(1)  NULL ,
 	Medicine             VARCHAR2(15)  NULL ,
 	Supplement           VARCHAR2(15)  NULL ,
 	PrefIngredient       VARCHAR2(15)  NULL ,
@@ -80,7 +78,7 @@ CREATE TABLE Supplement
 	Ingredient           VARCHAR2(15)  NULL ,
 	Manufacturer         VARCHAR2(15)  NULL ,
 	Precaution           VARCHAR2(30)  NULL ,
-	Rate                 float  NOT NULL  CONSTRAINT  Validation_Rule_Rate CHECK (Rate BETWEEN 0 AND 5)
+	Rate                 float  NOT NULL 
 );
 
 CREATE UNIQUE INDEX XPKSupplement ON Supplement
@@ -110,7 +108,7 @@ CREATE TABLE Review
 (
 	Title                VARCHAR2(15)  NOT NULL ,
 	Posted               date  NULL ,
-	ReviewId             integer  NOT NULL ,
+	ReviewId             CHAR(18)  NOT NULL ,
 	SupId                integer  NOT NULL ,
 	MemId                integer  NOT NULL 
 );
@@ -136,7 +134,7 @@ ALTER TABLE Disease
 
 ALTER TABLE MemberInfo
 	ADD (
-CONSTRAINT R_1 FOREIGN KEY (MemId) REFERENCES Member (MemId));
+CONSTRAINT R_1 FOREIGN KEY (MemId) REFERENCES Memeber (MemId));
 
 ALTER TABLE TakingSupplement
 	ADD (
@@ -144,7 +142,7 @@ CONSTRAINT R_8 FOREIGN KEY (SupId) REFERENCES Supplement (SupId));
 
 ALTER TABLE TakingSupplement
 	ADD (
-CONSTRAINT R_10 FOREIGN KEY (MemId) REFERENCES Member (MemId));
+CONSTRAINT R_10 FOREIGN KEY (MemId) REFERENCES Memeber (MemId));
 
 ALTER TABLE TakingSupplement
 	ADD (
@@ -152,7 +150,7 @@ CONSTRAINT R_7 FOREIGN KEY (MemId) REFERENCES MemberInfo (MemId));
 
 ALTER TABLE Review
 	ADD (
-CONSTRAINT R_3 FOREIGN KEY (MemId) REFERENCES Member (MemId));
+CONSTRAINT R_3 FOREIGN KEY (MemId) REFERENCES Memeber (MemId));
 
 ALTER TABLE Review
 	ADD (
