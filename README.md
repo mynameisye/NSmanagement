@@ -6,12 +6,10 @@
 -회원가입시 MemberInfo(입력정보)와 함께 빈 MemberInfo생성
 -로그인시 로그인 창에 이름과 로그아웃 버튼 출력
 -session에 id와 name저장
-<hr>
 
 <h3>[회원정보 관리]<br></h3>
 -MemberInfo를 불러와 form에 삽입
 -수정 버튼 클릭시 DB에 반영, home으로 돌아감
-<hr>
 
 <h3>[검색기능]<br></h3>
 -Open API등으로 데이터를 삽입/갱신하는 기능을 계획하였으나 미구현
