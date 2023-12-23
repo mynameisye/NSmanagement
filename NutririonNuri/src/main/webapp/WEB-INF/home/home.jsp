@@ -62,7 +62,7 @@ String userName = (String)session.getAttribute("curUserName");
                         <option value="name">이름</option>
                         <option value="effect">효능</option>
                         <option value="ingredient">성분</option>
-                        <option value="company">제조사</option>
+                        <option value="manufacturer">제조사</option>
                     </select>
                     <input type="text" name="keyword" placeholder="영양제 검색">            
                     <input type="submit" value="검색">

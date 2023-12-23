@@ -86,27 +86,6 @@
                         <td><input type="text" size="14" name="member_phone" placeholder="전화번호를 입력해 주세요" required></td>
                     </tr>
                     <tr>
-                        <td align="center">생년월일</td>
-                        <td><input type="text" name="year" maxlength="4" size="4">년
-                            <select name="month">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                                <option>11</option>
-                                <option>12</option>
-                            </select>월
-                            <input type="number" name="day" min="1" max="31">일
-                            <input type="radio" name="solar">양력 <input type="radio" name="lunar">음력
-                        </td>
-                    </tr>
-                    <tr>
                         <td align="center">이메일</td>
                         <td><input type="text" size="9" name="mail1">@ 
                         <select name="mail2">

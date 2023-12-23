@@ -38,9 +38,6 @@ public class NSManager {
     //findMyNSList
     //findMyNS
     
-    //calStarRate
-    //findSearchList
-    //findStarList
     public List<NS> findStarList() throws SQLException {
         return nsDAO.findStarList();
     }

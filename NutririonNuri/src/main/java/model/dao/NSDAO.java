@@ -47,7 +47,6 @@ public class NSDAO {
                     + "ORDER BY SupId";
             jdbcUtil.setSqlAndParameters(sql, new Object[] {"%"+ keyword +"%"});
         }
-      
 
         try {
             ResultSet rs = jdbcUtil.executeQuery();               
